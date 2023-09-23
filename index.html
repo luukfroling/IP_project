@@ -12,7 +12,7 @@
         </style>
 
         <!-- VIDEO SCRIPT -->
-        <script src="https://www.youtube.com/player_api"></script>
+        <script src="http://www.youtube.com/player_api"></script>
         <script>
             // create youtube player
             var player;
@@ -45,10 +45,9 @@
         <script>
             let penaltyCount = 0; 
             let answer = 'cbda'
-
             let evaluateAnswer = (id) => {
                 if(document.getElementById(id).value == answer){
-                    document.getElementById("enter_qst2").style.display = "block";
+                    document.getElementById("enter_qst"+(currentPage)).style.display = "block";
                 } else {
                     penaltyCount++;
                     document.getElementById(id).classList.add("is-invalid")
@@ -178,13 +177,17 @@
                         placeholder="Answer"
                         aria-label="answer"
                         aria-describedby="button-addon1"
-                        id="answer-1"
+                        id="answer-2"
                         />
-                        <button class="btn btn-secondary" type="button" data-mdb-ripple-color="dark" onclick={evaluateAnswer("answer-1")}>
+                        <button class="btn btn-secondary" type="button" data-mdb-ripple-color="dark" onclick={evaluateAnswer("answer-2")}>
                             submit
                         </button>
                     </div>
                 </div>
+            </div>
+            <div class="row text-center mt-3" id="enter_qst3">
+                <h4 class="text-success text-center">You completed the escape room!</p>
+            </div>
         </div>
 
         <!-- END OF PAGE 3 -->
@@ -195,6 +198,8 @@
             document.getElementById("page-2").style.display = "none"
             document.getElementById("page-3").style.display = "none"
             document.getElementById("enter_qst2").style.display = "none"
+            document.getElementById("enter_qst3").style.display = "none"
+
 
         </script>
     </body>
