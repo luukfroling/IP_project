@@ -1,0 +1,201 @@
+<html style="scroll-behavior: smooth;">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>
+            Escape room
+        </title>
+
+        <style>
+            body::-webkit-scrollbar{
+                display: none;
+            }
+        </style>
+
+        <!-- VIDEO SCRIPT -->
+        <script src="http://www.youtube.com/player_api"></script>
+        <script>
+            // create youtube player
+            var player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('existing-iframe-example', {
+                    events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                    }
+                });
+            }
+            // autoplay video
+            function onPlayerReady(event) {
+                // event.target.playVideo();
+            }
+
+            function onPlayerStateChange(event) {
+                console.log(event.data);
+                if(event.data == 0) {
+                    document.getElementById("enter_escaperoom").style.display = "block"         
+                    console.log("ended")
+                }
+            }
+        </script>
+
+        <!-- NAVIGATIONAL SCRIPT -->
+        <script src="navigation.js"></script>
+        <script src="clock.js"></script>
+
+        <script>
+            let penaltyCount = 0; 
+            let answer = 'cbda'
+
+            let evaluateAnswer = (id) => {
+                if(document.getElementById(id).value == answer){
+                    document.getElementById("enter_qst2").style.display = "block";
+                } else {
+                    penaltyCount++;
+                    document.getElementById(id).classList.add("is-invalid")
+                }
+            }
+        </script>
+
+    </head>
+    <body>
+       
+            <nav class="navbar navbar-light text-center sticky-top bg-white" id="timer">
+                <p id="time" class="text-danger w-100 display-4 text-center"> 5 : 00</p>
+                <p id="penaltyCount"> 0 </p>
+                <audio id="myAudio">
+                    <source src="clock-ticking.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </nav>
+      
+        
+
+        <!-- STARTING PAGE -->
+        <div id="page-1"> 
+            <div class="container">
+                <!-- Title of page -->
+                <div class="row text-center mt-4 mb-5"> 
+                    <h1> Welcome to the online escape room </h1>
+                </div>
+                <!-- Video -->
+                <div class="row justify-content-center">
+                    <div class="text-center w-100">
+                        <div id="player"></div>
+                        <iframe id="existing-iframe-example"
+                                width="640" height="360"
+                                src="https://www.youtube.com/embed/OpUmLNZnc5U?enablejsapi=1"
+                                frameborder="0"
+                                style="border: solid 4px #37474F"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-2" id="enter_escaperoom">
+                <div class="row mb-0">
+                    <div class="col-12 text-center mb-0">
+                        <h3>Enter escaperoom when ready</h3>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3 text-center" onclick={changePage(1)} >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="75%" height="60%" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                            <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                        </svg>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- END OF STARTING PAGE  -->
+
+        <!-- PAGE 2, FIRST QUESTION -->
+        <div id="page-2" class="h-75">
+            <div class="row text-center mt-2 mb-5"> 
+                <h1> Question 1 </h1>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-6">
+                    <img src="puzzle1.png" alt="puzzle1" class="img-thumbnail">
+                </div>
+            </div>
+            <div class="row mt-5">
+                <!-- Input group -->
+                <div class="d-flex justify-content-center">
+                    <div class="input-group w-auto">
+                        <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Answer"
+                        aria-label="answer"
+                        aria-describedby="button-addon1"
+                        id="answer-1"
+                        />
+                        <button class="btn btn-secondary" type="button" data-mdb-ripple-color="dark" onclick={evaluateAnswer("answer-1")}>
+                            submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="container mt-2" id="enter_qst2">
+                <div class="row mb-0">
+                    <div class="col-12 text-center mb-0">
+                        <h3>Correct! Go to the next Question</h3>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3 text-center" onclick={changePage(1)} >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="75%" height="60%" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                            <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                        </svg>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- END OF PAGE 2, FIRST QUESTION -->
+
+        <!-- PAGE 3, SECOND QUESTION-->
+        <div id="page-3" class="h-75">
+            <div class="row text-center mt-2 mb-5"> 
+                <h1> Question 2 </h1>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-6">
+                    <img src="puzzle1.png" alt="puzzle1" class="img-thumbnail">
+                </div>
+            </div>
+            <div class="row mt-5">
+                <!-- Input group -->
+                <div class="d-flex justify-content-center">
+                    <div class="input-group w-auto">
+                        <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Answer"
+                        aria-label="answer"
+                        aria-describedby="button-addon1"
+                        id="answer-1"
+                        />
+                        <button class="btn btn-secondary" type="button" data-mdb-ripple-color="dark" onclick={evaluateAnswer("answer-1")}>
+                            submit
+                        </button>
+                    </div>
+                </div>
+        </div>
+
+        <!-- END OF PAGE 3 -->
+        
+        <script>
+            document.getElementById("enter_escaperoom").style.display = "none"
+            document.getElementById("timer").style.display = "none"
+            document.getElementById("page-2").style.display = "none"
+            document.getElementById("page-3").style.display = "none"
+            document.getElementById("enter_qst2").style.display = "none"
+
+        </script>
+    </body>
+</html>
