@@ -1,0 +1,354 @@
+<html style="scroll-behavior: smooth;">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>
+            Escape room
+        </title>
+
+        <style>
+            body::-webkit-scrollbar{
+                display: none;
+            }
+        </style>
+
+        <!-- GLOBAL VARIABLES -->
+        <script src="script/settings.js"></script>
+
+        <!-- VIDEO SCRIPT -->
+        <script src="https://www.youtube.com/player_api"></script>
+        <script src="script/videos.js"></script>
+
+        <!-- NAVIGATIONAL SCRIPT -->
+        <script src="script/navigation.js"></script>
+
+        <!-- QUESTIONS SCRIPT -->
+        <script src="script/questionLogic.js"></script>
+
+        <!-- TIMER SCRIPT -->
+        <script src="script/clock.js"></script>
+
+    </head>
+    <body>
+       <!-- TIMER + AUDIO -->
+            <nav class="navbar navbar-light text-center sticky-top bg-white" id="timer">
+                <p id="time" class="text-danger w-100 display-4 text-center"> -- : --</p>
+                <p id="penaltyCount"> 0 </p>
+                <audio id="myAudio">
+                    <source src="sounds/clock-ticking.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="wrongAudio">
+                    <source src="sounds/wrong.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="correctAudio">
+                    <source src="sounds/correct.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <audio id="hintAudio">
+                    <source src="sounds/hint.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </nav>
+      
+        
+
+        <!-- STARTING PAGE -->
+        <div id="page-1"> 
+            <div class="container">
+                <!-- Title of page -->
+                <div class="row text-center mt-4 mb-5"> 
+                    <h1> Welcome to the online escape room </h1>
+                </div>
+                <!-- Video -->
+                <div class="row justify-content-center">
+                    <div class="text-center w-100">
+                        <iframe id="intro-video"
+                                width="640" height="360"
+                                frameborder="0"
+                                src="https://www.youtube.com/embed/odbu2rcYZ7A?enablejsapi=1"
+                                style="border: solid 4px #37474F"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- ELEMENT WILL BE HIDDEN TILL END OF VIDEO -->
+            <div class="container mt-2" id="enter_escaperoom">
+                <div class="row mb-0">
+                    <div class="col-12 text-center mb-0">
+                        <h4>Enter escaperoom when ready</h4>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <a href="#" class="col-3 text-center stretched-link text-dark" onclick={changePage(1)} >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="75%" height="60%" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                            <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                        </svg>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- END OF STARTING PAGE  -->
+
+        <!-- PAGE 2, FIRST QUESTION -->
+        <div id="page-2" class="h-75">
+            <div class="row text-center mt-1 mb-1"> 
+                <h1> Question 1 </h1>
+            </div>
+            <div class="row justify-content-center mt-2">
+                <div class="col-6">
+                    <img src="img/puzzle1.png" alt="puzzle1" class="img-thumbnail">
+                </div>
+            </div>
+            <div class="row justify-content-center mt-2">
+                <div class="col-6 text-center" id="hint_q1">
+
+                </div>
+            </div>
+            <div class="row mt-5">
+                <!-- Input group -->
+                <div class="d-flex justify-content-center">
+                    <div class="col-2 text-center" id="hint_btn_q1">
+                        <button class="btn btn-secondary w-50 " type="button" data-mdb-ripple-color="dark"  id="1" onclick="requestHint(this.id)">
+                            hint  
+                      </button>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group w-auto">
+                        
+                            <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Answer"
+                            aria-label="answer"
+                            aria-describedby="button-addon1"
+                            id="answer_1-input"
+                            />
+                            <button class="btn btn-secondary" type="button" data-mdb-ripple-color="dark" id="answer_1" onclick="evaluateAnswer(this.id)">
+                                submit
+                            </button>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+
+            <div class="container mt-2" id="enter_qst2">
+                <div class="row justify-content-center">
+                    <a href="#" class="col-3 text-center stretched-link text-dark" onclick={changePage(1)} >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                            <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                        </svg>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- END OF PAGE 2, FIRST QUESTION -->
+
+        <!-- PAGE 3, SECOND QUESTION-->
+        <div id="page-3" class="h-75">
+            <div class="row text-center mt-1 mb-1"> 
+                <h1> Question 2 </h1>
+            </div>
+            <div class="row justify-content-center mt-2 h-25">
+                <div class="col-6">
+                    <p class="lead" id="question-2"> loading ...</p>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-2">
+                <div class="col-6 text-center" id="hint_q2">
+
+                </div>
+            </div>
+            
+                <div class="row my-5">
+                    <!-- Input group -->
+                    <div class="d-flex justify-content-center">
+                        <div class="col-2 text-center" id="hint_btn_q2">
+                            <button class="btn btn-secondary w-50 " type="button" data-mdb-ripple-color="dark"  id="2" onclick="requestHint(this.id)">
+                                hint  
+                          </button>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group w-auto">
+                            
+                                <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Answer"
+                                aria-label="answer"
+                                aria-describedby="button-addon1"
+                                id="answer_2-input"
+                                />
+                                <button class="btn btn-secondary" type="button" data-mdb-ripple-color="dark" id="answer_2" onclick="evaluateAnswer(this.id)">
+                                    submit
+                                </button>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row text-center mt-2" id="enter_qst3">
+                    <div class="row justify-content-center">
+                        <a href="#" class="col-3 text-center stretched-link text-dark" onclick={changePage(1)} >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                                <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            
+            
+        </div>
+
+        <!-- END OF PAGE 3 -->
+
+        <!-- START PAGE 4 -->
+        <div id="page-4" class="h-75">
+            <div class="row text-center mt-1 mb-1"> 
+                <h1> Question 3 </h1>
+            </div>
+            <div class="row justify-content-center mt-2 h-50">
+                <div class="col-6">
+                    <p class="lead" id="question-3"> loading... </p>
+                    <div class="text-center ">
+                        <img src="img/placeholder.png" class="img-fluid img-thumbnail h-75">
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-2">
+                <div class="col-6 text-center" id="hint_q3">
+
+                </div>
+            </div>
+            
+                <div class="row my-5">
+                    <!-- Input group -->
+                    <div class="d-flex justify-content-center">
+                        <div class="col-1 text-center" id="hint_btn_q3">
+                            <button class="btn btn-secondary w-50 " type="button" data-mdb-ripple-color="dark"  id="3" onclick="requestHint(this.id)">
+                                hint  
+                          </button>
+                        </div>
+                        <div class="col-1">
+                            <button type="button" id="btn0" class="btn btn-outline-secondary" onclick="clicked(this.id)">button 1</button>
+                        </div>
+                        <div class="col-1">
+                            <button type="button" id="btn1" class="btn btn-outline-secondary" onclick="clicked(this.id)">button 2</button>
+                        </div>
+                        <div class="col-1">
+                            <button type="button" id="btn2" class="btn btn-outline-secondary" onclick="clicked(this.id)">button 3</button>
+                        </div>
+                        <div class="col-1">
+                            <button type="button" id="btn3" class="btn btn-outline-secondary" onclick="clicked(this.id)">button 4</button>
+                        </div>
+                        <div class="col-1">
+                            <button type="button" id="btn4" class="btn btn-outline-secondary" onclick="clicked(this.id)">button 5</button>
+                        </div>
+                        <div class="col-1">
+                            <button type="button" id="btn5" class="btn btn-outline-secondary" onclick="clicked(this.id)">button 6</button>
+                        </div>
+                        <div class="col-1">
+                            <button type="button" id="answer-3" class="btn btn-secondary" onclick="submitButtons(this.id)">submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center mt-2" id="enter_qst4">
+                    <h4 class="text-success text-center">You completed the escape room!</p>
+                    <div class="row justify-content-center">
+                        <a href="#" class="col-3 text-center stretched-link text-dark" onclick={changePage(1)} >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                                <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            
+            
+        </div>
+
+        <!-- ENDING PAGE -->
+        <div id="page-5"> 
+            <div class="container">
+
+                <!-- Video -->
+                <div class="row justify-content-center">
+                    <div class="text-center w-100">
+                        <iframe id="outro-video"
+                                width="640" height="360"
+                                frameborder="0"
+                                src="https://www.youtube.com/embed/rBiVL4Iw_ZE?enablejsapi=1"
+                                style="border: solid 4px #37474F"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-2" id="exit_escaperoom">
+                <div class="row mb-0">
+                    <div class="col-12 text-center mb-0">
+                        <h4 class="text-success">Here we can put where to go next</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIMEOUT PAGE -->
+        <div id="page-6"> 
+            <div class="container">
+
+                <!-- Video -->
+                <div class="row justify-content-center">
+                    <div class="text-center w-100">
+                        <iframe id="timeout-video"
+                                width="640" height="360"
+                                frameborder="0"
+                                src="https://www.youtube.com/embed/Y3IOZdmu3NA?enablejsapi=1"
+                                style="border: solid 4px #37474F"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-2" id="restart_escaperoom">
+                <div class="row mb-0">
+                    <div class="col-12 text-center mb-0">
+                        <h4>Here we can put where to go next</h4>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <a href="#" class="col-3 text-center stretched-link text-dark" onclick={changePage(1)} >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="75%" height="60%" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                            <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                        </svg>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+        
+        <script>
+            //HIDDEN ELEMENTS
+            //hide all that's not to be seen...
+            document.getElementById("timer").style.display = "none"
+            document.getElementById("page-2").style.display = "none"
+            document.getElementById("page-3").style.display = "none"
+            document.getElementById("page-4").style.display = "none"
+            document.getElementById("page-5").style.display = "none"
+            document.getElementById("page-6").style.display = "none"
+
+
+            document.getElementById("enter_escaperoom").style.display = "none"
+            document.getElementById("enter_qst2").style.display = "none"
+            document.getElementById("enter_qst3").style.display = "none"
+            document.getElementById("enter_qst4").style.display = "none"
+            document.getElementById("exit_escaperoom").style.display = "none"
+            document.getElementById("restart_escaperoom").style.display = "none"
+        </script>
+    </body>
+</html>
