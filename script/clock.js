@@ -18,7 +18,7 @@ let initiateCountdown = () => {
         minutes = Math.floor(diff / (1000 * 60));
         seconds = Math.floor((diff % (1000 * 60)) / 1000);
         if((diff > 0) && (!hasWon)){
-            //document.getElementById("myAudio").play()
+            document.getElementById("myAudio").play()
             document.getElementById("time").innerHTML = minutes + " : " + seconds;
         } else if(hasWon) {
             document.getElementById("time").innerHTML = finalMinutes + " : " + finalSeconds;
