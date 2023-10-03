@@ -3,18 +3,18 @@ let evaluateAnswer = (id) => {
     //Check of input waarde gelijk is aan antwoord
     if(document.getElementById(id+"-input").value == settings[id]){
         //Geef feedback aan de gebruiker dat het antwoord goed is
-        document.getElementById(id).classList.remove("btn-secondary")
-        document.getElementById(id).classList.remove("btn-danger")
-        document.getElementById(id).classList.add("btn-success")
+        // document.getElementById(id).classList.remove("btn-secondary")
+        document.getElementById(id).classList.remove("btn-outline-danger")
+        document.getElementById(id).classList.add("btn-outline-success")
         document.getElementById("correctAudio").play()
         //Geef gebruiker mogelijkheid om verder te gaan
         document.getElementById("enter_qst"+(currentPage)).style.display = "block";
     } else {
         //Geef gebruiker feedback dat het antwoord niet goed was
         document.getElementById("wrongAudio").play()
-        document.getElementById(id).classList.remove("btn-secondary")
-        document.getElementById(id).classList.add("btn-success")
-        document.getElementById(id).classList.add("btn-danger")
+        // document.getElementById(id).classList.remove("btn-secondary")
+        document.getElementById(id).classList.add("btn-outline-success")
+        document.getElementById(id).classList.add("btn-outline-danger")
         //Minpunten!
         penaltyCount++;
     }
